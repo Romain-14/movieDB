@@ -77,8 +77,7 @@ function displaySearchDetail(detail){
                       newReleaseDate,
                       newOverview);
 
-    // afficher maintenant la liste des "companies" 
-    // vérifier si elles "existent", prévenir le cas échéant l'utilisateur qu'il n 'y en a pas
+    // afficher maintenant la liste des "companies"
     fetch(`${BASE_FETCH_URL}/movie/${detail.id}?api_key=${API_KEY}&language=en-US`)
         .then(res => res.json())
         .then(res => getCompanies(articleDOM, res.production_companies))
@@ -86,28 +85,27 @@ function displaySearchDetail(detail){
 }
 
 function getCompanies(articleDOM, companies){
-    
+    // vérifier si elles "existent", prévenir l'utilisateur qu'il n'y en a pas
     if(!companies.length){
         const companyEl = document.createElement("p");
         companyEl.textContent = "No companies";
         articleDOM.append(companyEl);
     } else {        
-        const ul = document.createElement("ul");
         for (const company of companies) {
             fetch(`${BASE_FETCH_URL}/company/${company.id}?api_key=${API_KEY}`)
-                .then(res => res.json())
-                .then(res => displayCompanies(articleDOM, ul, res))
-                .catch(err => console.log(err))
+            .then(res => res.json())
+            .then(res => displayCompanies(articleDOM, res))
+            .catch(err => console.log(err))
         }
     }
 }
 
-function displayCompanies(articleDOM, ul, company){
+function displayCompanies(articleDOM, company){
+    const ul = document.createElement("ul");
     const li = document.createElement("li");
-    let a = null;
 
     if(company.homepage) {
-        a  = document.createElement("a");
+        const a  = document.createElement("a");
         a.href   = company.homepage;
         a.target = "_blank";
         a.textContent = company.name;
