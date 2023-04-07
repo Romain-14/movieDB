@@ -62,12 +62,12 @@ function displaySearchDetail(detail){
     const newOverview    = document.createElement("p");
 
     // insertion de contenu dans chaque élément HTML
-    newTitle.textContent = `${detail.original_title}`;
-    newImg.src           = `${API_URL_IMG}${detail.poster_path}`;
+    newTitle.textContent = detail.original_title;
+    newImg.src           = BASE_IMG_URL + detail.poster_path;
     newVoteCount.textContent = `vote count : ${detail.vote_count}`;
     newVoteAvg.textContent   = `vote average : ${detail.vote_average}`;
     newReleaseDate.textContent = new Date(detail.release_date).toLocaleDateString();
-    newOverview.textContent    = `${detail.overview}`;
+    newOverview.textContent    = detail.overview;
     
     // injection des éléments dans le DOM
     articleDOM.append(newTitle,
