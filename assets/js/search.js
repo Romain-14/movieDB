@@ -33,9 +33,10 @@ function displayMoviesList(movies){
     
     });
     // placer des écouteurs sur les "a" nouvellement créés
-    document.querySelectorAll("#list a").forEach(a=>{
-        a.addEventListener("click", getDetail);
-    });
+    document.querySelectorAll("#list a")
+        .forEach(a => {
+            a.addEventListener("click", getDetail);
+        });
 }
 
 function getDetail(e){
@@ -93,9 +94,9 @@ function getCompanies(articleDOM, companies){
     } else {        
         for (const company of companies) {
             fetch(`${BASE_FETCH_URL}/company/${company.id}?api_key=${API_KEY}`)
-            .then(res => res.json())
-            .then(res => displayCompanies(articleDOM, res))
-            .catch(err => console.log(err))
+                .then(res => res.json())
+                .then(res => displayCompanies(articleDOM, res))
+                .catch(err => console.log(err))
         }
     }
 }
